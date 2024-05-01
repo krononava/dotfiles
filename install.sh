@@ -41,6 +41,7 @@ if [ ! -e ~/.config/gtk-3.0 ]; then
     echo -e "Aborting...\n"
     exit
 fi
+## Make sure gtk.css symlink doesn't already exist
 if [ ! -e ~/.config/gtk-3.0/gtk.css ]; then
     echo -e "Symbolically linking gtk.css to gtk config directory\n"
     ln -s ~/dotfiles/gtk.css ~/.config/gtk-3.0/gtk.css
@@ -52,7 +53,23 @@ else
     echo -e "Delete the existing gtk.css to proceed\n"
 fi
 
+# Remap Caps Lock to Ctrl
 if [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]]; then
     echo -e "GNOME Desktop Environment detected, using dconf to remap caps lock as ctrl\n"
     dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
 fi
+
+# Set Neovim as default editor
+## Define the lines to be added
+line1="export EDITOR=nvim"
+## Path to the .bashrc file
+bashrc="$HOME/.bashrc"
+## Function to append a line if it does not exist
+append_line() {
+    local line="$1"
+    local file="$2"
+    grep -qF -- "$line" "$file" || echo "$line" >> "$file"
+}
+## Append lines to .bashrc if they do not exist
+append_line "$line1" "$bashrc"
+echo "Neovim is now the default editor in terminal"
