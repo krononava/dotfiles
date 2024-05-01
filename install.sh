@@ -24,8 +24,8 @@ if [ ! -e ~/.config/nvim/init.lua ]; then
     echo -e "Symbolically linking init.lua to nvim config directory\n"
     ln -s ~/dotfiles/init.lua ~/.config/nvim/
 else
-    echo -e "init.lua already exist at destination\n"
-    echo -e "Delete the exist init.lua to proceed\n"
+    echo -e "init.lua already exist at destination"
+    echo -e "Delete the existing init.lua to proceed\n"
 fi
 
 
@@ -37,7 +37,7 @@ if [ ! -f gtk.css ]; then
 fi
 ## Make sure gtk-3.0 directory exist
 if [ ! -e ~/.config/gtk-3.0 ]; then
-    echo -e "GTK 3.0 does not exist\n"
+    echo -e "GTK 3.0 does not exist"
     echo -e "Aborting...\n"
     exit
 fi
@@ -48,6 +48,11 @@ if [ ! -e ~/.config/gtk-3.0/gtk.css ]; then
     sleep 2
     pkill gnome-terminal
 else
-    echo -e "gtk.css already exist at destination\n"
-    echo -e "Delete the exist gtk.css to proceed\n"
+    echo -e "gtk.css already exist at destination"
+    echo -e "Delete the existing gtk.css to proceed\n"
+fi
+
+if [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]]; then
+    echo -e "GNOME Desktop Environment detected, using dconf to remap caps lock as ctrl\n"
+    dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
 fi

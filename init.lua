@@ -10,3 +10,4 @@ vim.keymap.set('c', 'kj', '<Esc>')
 vim.opt.number = true
 vim.opt.clipboard = 'unnamed'
 vim.opt.shiftwidth = 4
+vim.opt.scrolloff = 10
