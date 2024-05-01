@@ -57,7 +57,19 @@ fi
 if [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]]; then
     echo -e "GNOME Desktop Environment detected, using dconf to remap caps lock as ctrl\n"
     dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
+else
+    echo -e "Not using GNOME Desktop Environment, unable to remap caps lock as ctrl\n"
 fi
+
+# Change ttl to bypass wifi hotspot
+if [ ! -e /etc/sysctl.d/10-change-ttl.conf ]; then
+    echo -e "Symbolically linking 10-change-ttl.conf to sysctl directory\n"
+    ln -s ~/dotfiles/10-change-ttl.conf /etc/sysctl.d/10-change-ttl.conf
+else
+    echo -e "ttl config already exist at destination"
+    echo -e "Delete the existing 10-change-ttl.conf to proceed\n"
+fi
+
 
 # Set Neovim as default editor
 ## Define the lines to be added
