@@ -1,0 +1,7 @@
+[window.dimensions]
+columns = 110
+lines = 30
+
+[window.padding]
+x = 10
+y = 10

@@ -1,16 +1,7 @@
 #!/bin/bash
 
-source install-logic/check-existence.sh
-source install-logic/universal-install.sh
+source $HOME/dotfiles/install-logic/universal-install.sh
 
-check_desktop_environment "GNOME"
-gnomeexist=$?
+set_gnome_settings "org.gnome.desktop.default-applications.terminal" "exec" "alacritty"
 
-if [ gnomeexist -eq 0 ]; then
-    echo -e "Using gsettings to set alacritty as default terminal\n"
-    gsettings set org.gnome.desktop.default-applications.terminal exec alacritty
-else
-    echo -e "Unable to set alacritty as default terminal\n"
-fi
-
-file-link "alacritty.toml" "~/dotfiles/" "~/.config/alacritty/"
+link_file "alacritty.toml" "$HOME/dotfiles/" "$HOME/.config/alacritty/"

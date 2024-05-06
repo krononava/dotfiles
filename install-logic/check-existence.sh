@@ -1,9 +1,7 @@
 #!/bin/bash
 
-path="$1"
-
 check_file_existence() {
-    if [ -f "$path" ]; then
+    if [ -f "$1" ]; then
         return 0  # True, file exists
     else
         return 1  # False, file does not exist
@@ -11,7 +9,7 @@ check_file_existence() {
 }
 
 check_symlink_existence() {
-    if [ -L "$path" ]; then
+    if [ -L "$1" ]; then
         return 0  # True, file exists
     else
         return 1  # False, file does not exist
@@ -20,7 +18,7 @@ check_symlink_existence() {
 
 
 check_directory_existence() {
-    if [ -d "$path" ]; then
+    if [ -d "$1" ]; then
         return 0  # True, file exists
     else
         return 1  # False, file does not exist
@@ -28,7 +26,7 @@ check_directory_existence() {
 }
 
 check_any_existence() {
-    if [ -e "$path" ]; then
+    if [ -e "$1" ]; then
         return 0  # True, file exists
     else
         return 1  # False, file does not exist
