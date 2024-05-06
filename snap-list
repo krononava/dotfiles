@@ -1,0 +1,16 @@
+Name                       Version          Rev    Tracking         Publisher     Notes
+bare                       1.0              5      latest/stable    canonical**   base
+code                       e170252f         157    latest/stable    vscode**      classic
+core18                     20240416         2823   latest/stable    canonical**   base
+core20                     20240227         2264   latest/stable    canonical**   base
+core22                     20240408         1380   latest/stable    canonical**   base
+firefox                    125.0.3-1        4209   latest/stable    mozilla**     -
+firmware-updater           0+git.5007558    127    latest/stable    canonical**   -
+gnome-42-2204              0+git.510a601    176    latest/stable/…  canonical**   -
+gtk-common-themes          0.1-81-g442e511  1535   latest/stable/…  canonical**   -
+nvim                       v0.9.4           2819   latest/stable    neovim-snap   classic
+obsidian                   1.5.12           26     latest/stable    obsidianmd    classic
+pdfarranger                1.10.1           33     latest/stable    soumyadghosh  -
+snap-store                 0+git.97116aa    1134   latest/stable/…  canonical**   -
+snapd                      2.62             21465  latest/stable    canonical**   snapd
+snapd-desktop-integration  0.9              157    latest/stable/…  canonical**   -

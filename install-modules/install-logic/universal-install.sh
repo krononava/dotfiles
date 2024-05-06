@@ -2,7 +2,7 @@
 
 source check-existence.sh
 
-full-check() {
+link-file() {
     dotfile="$1"
     sourcepath="$2"
     sourcefile="$2$1"
@@ -35,11 +35,11 @@ full-check() {
     destinationfileexist=$?
 
     if [ destinationfileexist -eq 1 ]; then
-	echo -e "Symbolically linking init.lua to nvim config directory\n"
-	ln -s ~/dotfiles/init.lua ~/.config/nvim/
+	echo -e "Symbolically linking $dotfile to its config directory\n"
+	ln -s "$sourcefile" "$destinationpath"
     else
-	echo -e "init.lua already exist at destination"
-	echo -e "Delete the existing init.lua to proceed\n"
+	echo -e "$dotfile already exist at $destinationpath"
+	echo -e "Delete the existing $dotfile to proceed\n"
     fi
 
     return 0
