@@ -59,15 +59,8 @@ set_gnome_settings() {
     fi
 }
 
-set_default_editor() {
-    line1="export EDITOR=$1"
-    bashrc="$HOME/.bashrc"
-    ## Function to append a line if it does not exist
-    append_line() {
-        local line="$1"
-        local file="$2"
-        grep -qF -- "$line" "$file" || echo "$line" >> "$file"
-    }
-    ## Append lines to .bashrc if they do not exist
-    append_line "$line1" "$bashrc"
+add_line() {
+    line="$1"
+    file="$2"
+    grep -qF -- "$line" "$file" || echo "$line" >> "$file"
 }

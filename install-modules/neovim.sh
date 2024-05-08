@@ -4,4 +4,4 @@ source $HOME/dotfiles/install-logic/universal-install.sh
 
 link_file "init.lua" "$HOME/dotfiles/" "$HOME/.config/nvim/"
 
-set_default_editor "nvim"
+add_line "export EDITOR=nvim" "$HOME/.bashrc"
