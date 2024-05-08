@@ -2,4 +2,6 @@
 
 source $HOME/dotfiles/install-logic/universal-install.sh
 
-set_gnome_settings "org.gnome.desktop.input-sources" "xkb-options" "['ctrl:nocaps']"
+# set_gnome_settings "org.gnome.desktop.input-sources" "xkb-options" "['ctrl:nocaps']"
+
+add_line "XKBOPTIONS=\"ctrl:nocaps\"" "/etc/default/keyboard"
