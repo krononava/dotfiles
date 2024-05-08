@@ -8,3 +8,7 @@ cmap kj <Esc>
 set clipboard=unnamed
 
 set number
+
+set shiftwidth=4
+
+syntax on
