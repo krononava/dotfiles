@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # Check dotfiles directory
 parent_dir=$(dirname "$(realpath "$0")")
 if [ ! $parent_dir = $HOME/dotfiles ]; then

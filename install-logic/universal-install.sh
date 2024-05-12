@@ -11,7 +11,7 @@ link_file() {
 
 
     # check if personal config file exist
-    check_file_existence "$sourcefile"
+    check_any_existence "$sourcefile"
     sourcefileexist=$?
 
     if [ $sourcefileexist -eq 1 ]; then
@@ -29,18 +29,8 @@ link_file() {
         mkdir "$destinationpath"
     fi
 
-
-    # check if config file link already exist
-    check_symlink_existence "$destinationfile"
-    destinationfileexist=$?
-
-    if [ $destinationfileexist -eq 1 ]; then
-        echo -e "Symbolically linking $dotfile to its config directory\n"
-        ln -s "$sourcefile" "$destinationpath"
-    else
-        echo -e "$dotfile already exist at $destinationpath"
-        echo -e "Delete the existing $dotfile to proceed\n"
-    fi
+    echo -e "Symbolically linking $dotfile to its config directory\n"
+    ln -sf "$sourcefile" "$destinationpath"
 
     return 0
 }
@@ -63,4 +53,12 @@ add_line() {
     line="$1"
     file="$2"
     grep -qF -- "$line" "$file" || echo "$line" >> "$file"
+}
+
+recursive_symlink() {
+    directory="$2$1"
+    for filepath in "$directory"/*; do
+        filename=$(basename "$filepath")
+        link_file $filename "$directory/" $3
+    done
 }
