@@ -38,3 +38,28 @@ RUN apt install -y python3 python3-pip && \
     pip install -r /tmp/requirements.txt --break-system-packages
 
 CMD ["zellij", "options", "--default-shell", "fish"]
+
+FROM codercom/code-server AS coder
+WORKDIR /home/coder/project
+USER root
+
+RUN code-server --install-extension vscodevim.vim && \
+    code-server --install-extension pkief.material-icon-theme && \
+    code-server --install-extension spacebox.monospace-idx-theme
+
+COPY settings.json /root/.local/share/code-server/User/settings.json
+
+COPY packages.txt /tmp
+
+RUN apt update
+
+RUN xargs -a /tmp/packages.txt apt install -y
+
+ENTRYPOINT ["/usr/bin/entrypoint.sh", "--bind-addr", "0.0.0.0:8080", "--auth", "none", "."]
+
+FROM coder AS coder-python
+
+COPY requirements.txt /tmp
+
+RUN apt install -y python3 python3-pip && \
+    pip install -r /tmp/requirements.txt --no-cache-dir --break-system-packages
