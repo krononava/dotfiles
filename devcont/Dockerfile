@@ -1,5 +1,6 @@
 FROM quay.io/jupyter/minimal-notebook AS jupyter
 
+
 FROM jupyter AS jupyter-python
 COPY requirements.txt /tmp
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
@@ -48,10 +49,14 @@ COPY settings.json /root/.local/share/code-server/User/settings.json
 COPY packages.txt /tmp
 RUN apt update
 RUN xargs -a /tmp/packages.txt apt install -y
-ENTRYPOINT ["/usr/bin/entrypoint.sh", "--bind-addr", "0.0.0.0:8080", "--auth", "none", "."]
+ENTRYPOINT ["/usr/bin/entrypoint.sh", "--bind-addr", "127.0.0.1:8080", "--auth", "none", "."]
 
 
 FROM coder AS coder-python
 COPY requirements.txt /tmp
 RUN apt install -y python3 python3-pip && \
     pip install -r /tmp/requirements.txt --no-cache-dir --break-system-packages
+
+
+FROM coder AS coder-javascript
+RUN apt install -y nodejs npm

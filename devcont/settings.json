@@ -60,5 +60,6 @@
         }
     ],
     "workbench.startupEditor": "none",
-	"security.workspace.trust.enabled": false
+	"security.workspace.trust.enabled": false,
+    "terminal.integrated.lineHeight": 2
 }
