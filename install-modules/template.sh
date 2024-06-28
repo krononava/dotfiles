@@ -2,4 +2,4 @@
 
 # source $HOME/dotfiles/install-logic/universal-install.sh
 
-# link_file "file" "$HOME/dotfiles/" "destination/path"
+# symlink "file" "$HOME/dotfiles/" "destination/path"

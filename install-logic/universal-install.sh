@@ -1,8 +1,8 @@
 #!/bin/bash
 
-source $HOME/dotfiles/install-logic/check-existence.sh
+source $HOME/dotfiles/install-logic/error-handling.sh
 
-link_file() {
+symlink() {
     dotfile="$1"
     sourcepath="$2"
     sourcefile="$2$1"
@@ -35,30 +35,16 @@ link_file() {
     return 0
 }
 
-set_gnome_settings() {
-    schema=$1
-    key=$2
-    value=$3
-
-    check_desktop_environment "GNOME"
-    gnomeexist=$?
-
-    if [ $gnomeexist -eq 0 ]; then
-        echo -e "Setting $value to $key ..."
-        gsettings set "$schema" "$key" "$value"
-    fi
+recursive_symlink() {
+    directory="$2$1"
+    for filepath in "$directory"/*; do
+        filename=$(basename "$filepath")
+        symlink $filename "$directory/" $3
+    done
 }
 
 add_line() {
     line="$1"
     file="$2"
     grep -qF -- "$line" "$file" || echo "$line" >> "$file"
-}
-
-recursive_symlink() {
-    directory="$2$1"
-    for filepath in "$directory"/*; do
-        filename=$(basename "$filepath")
-        link_file $filename "$directory/" $3
-    done
 }

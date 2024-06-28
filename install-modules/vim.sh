@@ -2,4 +2,4 @@
 
 source $HOME/dotfiles/install-logic/universal-install.sh
 
-link_file ".vimrc" "$HOME/dotfiles/" "$HOME/"
+symlink ".vimrc" "$HOME/dotfiles/" "$HOME/"
