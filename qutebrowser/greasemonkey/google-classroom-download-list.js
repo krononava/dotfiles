@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google Classroom Drive Attachment Downloader
 // @namespace    http://tampermonkey.net/
-// @version      1.9
+// @version      2.0
 // @description  Creates a scrollable download panel for Google Drive attachments in Google Classroom
 // @match        https://classroom.google.com/*
 // @grant        none
@@ -124,13 +124,27 @@
         }
     });
 
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    // Run on initial page load
-    if (document.readyState === 'complete') {
+    // Function to initialize or reset the script
+    function initializeScript() {
+        panelCreated = false;
+        canCreatePanel = true;
+        if (observer) {
+            observer.disconnect();
+        }
+        observer.observe(document.body, { childList: true, subtree: true });
         checkForAttachments();
-    } else {
-        window.addEventListener('load', checkForAttachments);
     }
-})();
 
+    // Run on initial page load and subsequent navigations
+    if (document.readyState === 'complete') {
+        initializeScript();
+    } else {
+        window.addEventListener('load', initializeScript);
+    }
+
+    // Reset script state on page unload (for single-page app navigation)
+    window.addEventListener('beforeunload', () => {
+        panelCreated = false;
+        canCreatePanel = true;
+    });
+})();
