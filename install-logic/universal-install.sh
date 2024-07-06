@@ -29,6 +29,16 @@ symlink() {
         mkdir "$destinationpath"
     fi
 
+    # delete directory before symbolic link to prevent cannot overwrite directory error
+    check_directory_existence "$destinationfile"
+    isdirectory=$?
+
+    if [ $isdirectory -eq 1 ]; then
+	echo -e "Destination object is a directory, removing destination object...\n"
+        rm -rf $destinationfile
+    fi
+
+    # finally symbolic link the file / directory
     echo -e "Symbolically linking $dotfile to its config directory\n"
     ln -sf "$sourcefile" "$destinationpath"
 
