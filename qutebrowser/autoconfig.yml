@@ -38,8 +38,16 @@ settings:
     global: true
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: true
+  downloads.location.prompt:
+    global: false
+  qt.args:
+    global: null
   qt.chromium.process_model:
     global: process-per-site-instance
+  qt.environ:
+    global: null
+  qt.force_platform:
+    global: xcb
   qt.highdpi:
     global: true
   scrolling.smooth:
